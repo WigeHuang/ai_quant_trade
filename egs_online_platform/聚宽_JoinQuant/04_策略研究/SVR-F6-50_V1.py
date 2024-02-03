@@ -1,7 +1,6 @@
 # 克隆自聚宽文章：https://www.joinquant.com/post/41917
 # 标题：致敬聚宽: 机器学习多因子,50只持仓,14年37倍
 # 作者：Gyro^.^
-
 import pandas as pd
 import numpy as np
 import datetime as dt
@@ -46,6 +45,8 @@ def handle_training(context):
     dt_last = context.previous_date
     # stocks
     stocks = get_index_stocks(index, dt_last)
+    # filter stocks to only include those in Shanghai and Shenzhen
+    stocks = [s for s in stocks if s.startswith('60') or s.startswith('00')]
     # fundamental data
     q = query(
             valuation.code,
